@@ -48,6 +48,15 @@ class Circle
     return false;
   }
   
+  boolean colliding (float x, float y)
+  {
+    if(dist(this.getX(), this.getY(), x, y) < this.getR() )
+    return true;
+    else 
+    return false;
+    
+  }
+  
   //with this method I fixed a previous problem where the circle does not exist 
   //in the same place as the objects of Class Vehicle.
   void update(PVector location)

@@ -16,8 +16,8 @@ class Vehicle
   {
     location = new PVector(x, y);
     r = 6;
-    maxSpeed = 1.5;
-    maxForce = 0.2;
+    maxSpeed = 1.1;
+    maxForce = 0.3;
     acceleration = new PVector(0, 0);
     velocity = new PVector(0, 0);
     personalBubble = new Circle(location.x,location.y,crad +2);
@@ -55,7 +55,7 @@ class Vehicle
   void display()
   {
      //noStroke();
-     personalBubble.display();
+     //personalBubble.display();
      stroke(255);
      fill(255, 200, 0);
      pushMatrix();
@@ -111,7 +111,7 @@ class Vehicle
    PVector desired = PVector.sub(location,c);
    desired.setMag(maxSpeed);
    PVector steer = PVector.sub(desired,velocity);
-   steer.limit(maxForce); 
+   steer.limit(.35); 
    applyForce(steer);
   }
   
@@ -130,7 +130,10 @@ class Vehicle
    PVector nomad = new PVector(chase.getX(),chase.getY());
    
    //this says that if the vehicle is within 1 radius of a circle to avoid it
-   if (personalBubble.colliding(circ)){
+   //if (personalBubble.colliding(circ)){
+     
+   
+     if (circ.colliding(location.x,location.y)){
    avoid(circ);  
    }//Otherwise, keep seeking the nomad (or vehicle2 if that's easier to understand)
    else{
@@ -141,6 +144,16 @@ class Vehicle
    getAway.mult(1.5);
    applyForce(getAway);
    
+  }
+  
+  float getX()
+  {
+   return location.x; 
+  }
+  
+  float getY()
+  {
+   return location.y; 
   }
   
  
